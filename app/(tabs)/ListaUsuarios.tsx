@@ -79,7 +79,7 @@ export default function ListaUsuarios() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>👥 Lista de Usuarios</Text>
+      <Text style={styles.titulo}> Lista de Usuarios</Text>
 
       <TextInput
         placeholder="Nombre del usuario"

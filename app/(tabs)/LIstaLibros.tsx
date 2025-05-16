@@ -54,12 +54,21 @@ export default function ListaLibros() {
   };
 
   const eliminarLibro = (id: string) => {
-    setLibros((prev) => prev.filter((libro) => libro.id !== id));
-    if (editandoId === id) {
-      setEditandoId(null);
-      setTitulo("");
-      setAutor("");
-    }
+    Alert.alert("Eliminar libro", "¿Estás seguro que deseas eliminar este libro?", [
+      { text: "Cancelar", style: "cancel" },
+      {
+        text: "Eliminar",
+        style: "destructive",
+        onPress: () => {
+          setLibros((prev) => prev.filter((libro) => libro.id !== id));
+          if (editandoId === id) {
+            setEditandoId(null);
+            setTitulo("");
+            setAutor("");
+          }
+        },
+      },
+    ]);
   };
 
   const editarLibro = (libro: Libro) => {
@@ -70,7 +79,7 @@ export default function ListaLibros() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>📚 Lista de Libros</Text>
+      <Text style={styles.titulo}> Lista de Libros</Text>
 
       <TextInput
         placeholder="Título del libro"
@@ -104,7 +113,6 @@ export default function ListaLibros() {
               <TouchableOpacity onPress={() => eliminarLibro(item.id)}>
                 <Text style={styles.btnEliminar}>Eliminar</Text>
               </TouchableOpacity>
-
             </View>
           </View>
         )}

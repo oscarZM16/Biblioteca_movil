@@ -81,7 +81,7 @@ export default function ListaPrestamos() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>📋 Lista de Préstamos</Text>
+      <Text style={styles.titulo}> Lista de Préstamos</Text>
 
       <TextInput
         placeholder="Nombre del usuario"
