@@ -1,13 +1,5 @@
 import { useRouter } from "expo-router";
-import {
-  Alert,
-  Button,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from "react-native";
+import { Alert, Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const libros = [
   { id: "1", titulo: "Cien años de soledad" },
@@ -28,11 +20,7 @@ export default function HomeTab() {
 
       <ScrollView contentContainerStyle={styles.lista}>
         {libros.map((libro) => (
-          <TouchableOpacity
-            key={libro.id}
-            style={styles.casilla}
-            onPress={() => verLibro(libro.titulo)}
-          >
+          <TouchableOpacity key={libro.id} style={styles.casilla} onPress={() => verLibro(libro.titulo)}>
             <Text style={styles.textoBoton}>{libro.titulo}</Text>
           </TouchableOpacity>
         ))}

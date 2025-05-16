@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-    Alert,
-    Button,
-    FlatList,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from "react-native";
+import { Alert, Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, } from "react-native";
 
 type Prestamo = {
   id: string;
@@ -83,29 +74,12 @@ export default function ListaPrestamos() {
     <View style={styles.container}>
       <Text style={styles.titulo}> Lista de Préstamos</Text>
 
-      <TextInput
-        placeholder="Nombre del usuario"
-        value={nombreUsuario}
-        onChangeText={setNombreUsuario}
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Nombre del libro"
-        value={nombreLibro}
-        onChangeText={setNombreLibro}
-        style={styles.input}
-      />
+      <TextInput placeholder="Nombre del usuario" value={nombreUsuario} onChangeText={setNombreUsuario} style={styles.input}/>
+      <TextInput placeholder="Nombre del libro" value={nombreLibro} onChangeText={setNombreLibro} style={styles.input}/>
 
-      <Button
-        title={editandoId ? "Guardar cambios" : "Agregar préstamo"}
-        onPress={agregarPrestamo}
-      />
+      <Button title={editandoId ? "Guardar cambios" : "Agregar préstamo"} onPress={agregarPrestamo}/>
 
-      <FlatList
-        style={{ marginTop: 20 }}
-        data={prestamos}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+      <FlatList style={{ marginTop: 20 }} data={prestamos} keyExtractor={(item) => item.id} renderItem={({ item }) => (
           <View style={styles.item}>
             <View style={{ flex: 1 }}>
               <Text style={styles.libro}>{item.nombreLibro}</Text>

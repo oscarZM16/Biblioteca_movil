@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  Button,
-  FlatList,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Alert, Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, } from "react-native";
 
 type Libro = {
   id: string;
@@ -81,26 +72,12 @@ export default function ListaLibros() {
     <View style={styles.container}>
       <Text style={styles.titulo}> Lista de Libros</Text>
 
-      <TextInput
-        placeholder="Título del libro"
-        value={titulo}
-        onChangeText={setTitulo}
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Autor"
-        value={autor}
-        onChangeText={setAutor}
-        style={styles.input}
-      />
+      <TextInput placeholder="Título del libro" value={titulo} onChangeText={setTitulo} style={styles.input}/>
+      <TextInput placeholder="Autor" value={autor} onChangeText={setAutor} style={styles.input}/>
 
       <Button title={editandoId ? "Guardar cambios" : "Agregar libro"} onPress={agregarLibro} />
 
-      <FlatList
-        style={{ marginTop: 20 }}
-        data={libros}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+      <FlatList style={{ marginTop: 20 }} data={libros} keyExtractor={(item) => item.id} renderItem={({ item }) => (
           <View style={styles.item}>
             <View style={{ flex: 1 }}>
               <Text style={styles.libro}>{item.titulo}</Text>

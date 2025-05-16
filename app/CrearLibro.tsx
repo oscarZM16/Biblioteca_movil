@@ -13,17 +13,10 @@ export default function CrearLibro() {
       return;
     }
 
-    // Aquí iría la lógica para guardar el libro,
-    // por ejemplo enviar a backend o estado global.
-
     Alert.alert("Libro guardado", `Título: ${titulo}\nAutor: ${autor}`);
 
-    // Limpia campos (opcional)
     setTitulo("");
     setAutor("");
-
-    // Regresa a la lista de libros
-    router.back();
   };
 
   return (

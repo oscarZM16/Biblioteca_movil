@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-    Alert,
-    Button,
-    FlatList,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from "react-native";
+import { Alert, Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, } from "react-native";
 
 type Usuario = {
   id: string;
@@ -81,27 +72,13 @@ export default function ListaUsuarios() {
     <View style={styles.container}>
       <Text style={styles.titulo}> Lista de Usuarios</Text>
 
-      <TextInput
-        placeholder="Nombre del usuario"
-        value={nombre}
-        onChangeText={setNombre}
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Correo electrónico"
-        value={correo}
-        onChangeText={setCorreo}
-        style={styles.input}
-        keyboardType="email-address"
-      />
+      <TextInput placeholder="Nombre del usuario" value={nombre} onChangeText={setNombre} style={styles.input}/>
+      <TextInput placeholder="Correo electrónico" value={correo} onChangeText={setCorreo} style={styles.input} keyboardType="email-address" />
 
       <Button title={editandoId ? "Guardar cambios" : "Agregar usuario"} onPress={agregarUsuario} />
 
       <FlatList
-        style={{ marginTop: 20 }}
-        data={usuarios}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+        style={{ marginTop: 20 }} data={usuarios} keyExtractor={(item) => item.id} renderItem={({ item }) => (
           <View style={styles.item}>
             <View style={{ flex: 1 }}>
               <Text style={styles.nombre}>{item.nombre}</Text>
