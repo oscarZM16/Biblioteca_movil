@@ -23,7 +23,7 @@ export default function CrearLibro() {
     setAutor("");
 
     // Regresa a la lista de libros
-    router.back("/app/(tabs)/LIstaLibros.tsx");
+    router.back();
   };
 
   return (

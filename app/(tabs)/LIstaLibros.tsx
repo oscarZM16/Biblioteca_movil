@@ -1,13 +1,13 @@
-import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-    Alert,
-    Button,
-    FlatList,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Alert,
+  Button,
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 type Libro = {
@@ -23,31 +23,69 @@ export default function ListaLibros() {
     { id: "3", titulo: "La sombra del viento", autor: "Carlos Ruiz Zafón" },
   ]);
 
-  const router = useRouter();
+  const [titulo, setTitulo] = useState("");
+  const [autor, setAutor] = useState("");
+  const [editandoId, setEditandoId] = useState<string | null>(null);
+
+  const agregarLibro = () => {
+    if (!titulo || !autor) {
+      Alert.alert("Campos incompletos", "Completa el título y el autor.");
+      return;
+    }
+
+    if (editandoId) {
+      setLibros((prev) =>
+        prev.map((libro) =>
+          libro.id === editandoId ? { ...libro, titulo, autor } : libro
+        )
+      );
+      setEditandoId(null);
+    } else {
+      const nuevoLibro: Libro = {
+        id: Date.now().toString(),
+        titulo,
+        autor,
+      };
+      setLibros((prev) => [...prev, nuevoLibro]);
+    }
+
+    setTitulo("");
+    setAutor("");
+  };
 
   const eliminarLibro = (id: string) => {
-    Alert.alert("Eliminar libro", "¿Estás seguro que deseas eliminar este libro?", [
-      { text: "Cancelar", style: "cancel" },
-      {
-        text: "Eliminar",
-        style: "destructive",
-        onPress: () => {
-          setLibros((prev) => prev.filter((libro) => libro.id !== id));
-        },
-      },
-    ]);
+    setLibros((prev) => prev.filter((libro) => libro.id !== id));
+    if (editandoId === id) {
+      setEditandoId(null);
+      setTitulo("");
+      setAutor("");
+    }
   };
 
   const editarLibro = (libro: Libro) => {
-    // Aquí podrías redirigir a una pantalla de edición si lo deseas
-    Alert.alert("Editar libro", `Funcionalidad aún no implementada para ${libro.titulo}`);
+    setTitulo(libro.titulo);
+    setAutor(libro.autor);
+    setEditandoId(libro.id);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>📚 Lista de Libros</Text>
 
-      <Button title="➕ Crear libro" onPress={() => router.push("/CrearLibro")} />
+      <TextInput
+        placeholder="Título del libro"
+        value={titulo}
+        onChangeText={setTitulo}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Autor"
+        value={autor}
+        onChangeText={setAutor}
+        style={styles.input}
+      />
+
+      <Button title={editandoId ? "Guardar cambios" : "Agregar libro"} onPress={agregarLibro} />
 
       <FlatList
         style={{ marginTop: 20 }}
@@ -66,6 +104,7 @@ export default function ListaLibros() {
               <TouchableOpacity onPress={() => eliminarLibro(item.id)}>
                 <Text style={styles.btnEliminar}>Eliminar</Text>
               </TouchableOpacity>
+
             </View>
           </View>
         )}
@@ -85,6 +124,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     textAlign: "center",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#aaa",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
   },
   item: {
     flexDirection: "row",
